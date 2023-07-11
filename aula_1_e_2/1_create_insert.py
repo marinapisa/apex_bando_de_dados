@@ -30,6 +30,8 @@ while True:
     else:
         print ('Informe um nome válido!')
 
+# Executar comandos SQL no banco de dados 
+# com a função execute da biblioteca sqlite3
 cursor.execute(f'''
 
     CREATE TABLE IF NOT EXISTS {nome_tabela} (
@@ -41,6 +43,54 @@ cursor.execute(f'''
 
  ''')
 
-print ('Tabela criada com sucesso!!')
+print ('Tabela criada com sucesso!!\n')
+
+# Pedir os dados ao usuario para preencher a tabela
+usuario_nome = ''
+usuario_idade = 0
+usuario_email = ''
+
+while True:
+    # ler dados
+    # OBS: input por padrao recebe strings(textos)
+    usuario_nome = input('Informe o nome do usuário: ')
+    usuario_idade = input('Informe a idade so usuário: ')
+    usuario_email = input('Informe o e-mail do usuário: ')
+
+    # Converter idade para inteiro
+    usuario_idade = int(usuario_idade)
+
+    # validar os dados armazenando valores true  ou false em variaveis de validação
+    validacao_um = usuario_nome != '' and len(usuario_nome) >= 3
+    validacao_dois = usuario_idade > 10 and usuario_idade < 100
+    validacao_tres = usuario_email != '' and '@' in usuario_email
+
+    if validacao_um and validacao_dois and validacao_tres:
+        print(f'Nome {usuario_nome}, idade {usuario_idade}, e-mail {usuario_email} são dados válidos!')
+        break
+    else:
+        print(f'Nome é válido: {validacao_um}')
+        print(f'Idade é válido: {validacao_dois}')
+        print(f'E-mail é válido: {validacao_tres}')
+        print('Informe dados váidos!')
+
+# Inserir os dados na nossa base de dados
+cursor.execute(f'''
+
+    INSERT INTO {nome_tabela}(nome, idade, email)
+    VALUES ('{usuario_nome}', {usuario_idade} , '{usuario_email}')
+
+ ''')
+
+print('Dados adicionados na tabela com sucesso!!')
+
+
+        
+
+
+
+
+
+
 
 
