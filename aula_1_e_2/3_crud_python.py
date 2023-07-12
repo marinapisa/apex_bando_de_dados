@@ -59,7 +59,7 @@ while True:
 
 
 
-        ...
+        
     elif operacao == '3':
                 # ler  id da coluna a modificar
         id_linha= input('Informe o ID do registro que deseja alterar: ')
@@ -88,7 +88,7 @@ while True:
 
 
 
-        ...
+        
     elif operacao == '4':        
         # ler os dados novos
         nome_novo = input('Informe o nome do usuário: ')
@@ -110,14 +110,14 @@ while True:
 
 
 
-        ...
+        
     elif operacao == '5':
         print('Laço de repetição parado com sucesso!!')
         break
 
-#     # # compactar nossas mudanças para entao enviar ela ao banco de dados
-# conexao.commit()
-# print('Comitou dados com sucesso!!')
+# compactar nossas mudanças para entao enviar ela ao banco de dados
+        conexao.commit()
+        print('Comitou dados com sucesso!!')
 # # fechar a conexão com a base de dados
 # conexao.close()
 # print('conexão fechada com sucesso!!')
