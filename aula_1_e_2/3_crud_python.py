@@ -37,51 +37,79 @@ while True:
         for item in resultado:
             print(item)
 
+
+
+
+
     elif operacao == '2':
-        os.system('cls')
         # ler o id da coluna a ser deletada
-        id = input('Digite o ID do registro que deseja deletar: ')
+        id_linha = input('Digite o ID do registro que deseja deletar: ')
+        id_linha = int(id_linha)
+        os.system('cls')
 
         # executar o código sql
         cursor.execute(f'''
             DELETE FROM usuarios
-            WHERE id = id 
+            WHERE id = {id_linha}; 
          ''')
 
         # printar mensagem de sucesso para quando deletar
-        print('Registro com id {id} deletado com sucesso!')
+        print(f'Registro com id {id_linha} deletado com sucesso!')
+
+
+
 
         ...
     elif operacao == '3':
-        os.system('cls')
-        # ler  id da coluna a modificar
-        id = input('Informe o ID do registro que deseja alterar: ')
+                # ler  id da coluna a modificar
+        id_linha= input('Informe o ID do registro que deseja alterar: ')
         # PEDIR QUAL INFORMAÇÃO DO REGISTRO DESEJA ALTERAR E FAZER UM EXECUTE PARA CADA ATRIBUTO?
         # executar o sódigo sql
-        cursor.execute(f''' 
-            UPDATE usuarios
-            SET nome = 'TESTE'
-            WHERE NOME = 'Marina';
-        ''')
+        os.system('cls') 
+        id_linha = int(id_linha) 
 
-        #  printar a mesagem de sucesso quando atualizar
-        print('Registro com id {id} alterado com sucesso!')
+        # ler os dados novos:
+        nome_novo = input('Informe o novo nome: ')  
+        email_novo = input('Informe o novo e-mail: ')  
+        idade_nova = input('Informe o nova idade: ')  
+        idade_nova = int(idade_nova)
+
+        # Validar os dados e inserir os mesmos caso sejam válidos
+        if len(nome_novo) > 3 and idade_nova > 0 and '@' in email_novo:
+            cursor.execute(f""" 
+            UPDATE usuarios
+            SET nome = '{nome_novo}', idade = {idade_nova}, email = '{email_novo}'
+            WHERE id = {id_linha};
+            """)
+            print(f'Dados atualizados com sucesso em id = {id_linha}!')
+        else:
+            print('Informe dados válidos para serem atualizados!')
+
+
+
 
         ...
-    elif operacao == '4':
-        os.system('cls')
+    elif operacao == '4':        
         # ler os dados novos
-        cursor.execute(f'''
-            INSERT INTO {contatos}(nome, idade, email)
-            VALUES ('{usuario_nome}', {usuario_idade} , '{usuario_email}')
-        ''')
+        nome_novo = input('Informe o nome do usuário: ')
+        email_novo = input('Informe o e-mail do usuário: ')
+        idade_nova = int(input('Informe a idade do usuário: '))
+
+        os.system('cls')
+
+        # Validar os dados e inserir os mesmos caso sejam válidos 
+        if len(nome_novo) > 3 and idade_nova > 0 and '@' in email_novo:
+            cursor.execute(f"""
+                INSERT INTO usuarios (nome, idade, email)
+                VALUES ('{nome_novo}', {idade_nova} , '{email_novo}');
+            """)
+            
+            print(f'Dados {nome_novo}, {idade_nova}, {email_novo} inseridos com sucesso!')
+        else:
+            print('Informe dados válidos!')
 
 
-        # validar os dados
 
-        # se validos vamos inserir dna base de dados
-
-        # senao, mostrar mensagem de erro ao usuário
         ...
     elif operacao == '5':
         print('Laço de repetição parado com sucesso!!')
