@@ -1,4 +1,4 @@
--- database: c:\Users\Marina-PC\Desktop\apex_bando_de_dados\aula_3\mydatabase.db
+-- database: c:\Users\Marina-PC\Desktop\apex_bando_de_dados\aula_3_e_4\mydatabase.db
 
 create table if not exists programadores (
     id INTEGER PRIMARY KEY ,

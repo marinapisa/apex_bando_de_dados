@@ -1,4 +1,4 @@
--- database: c:\Users\Marina-PC\Desktop\apex_bando_de_dados\aula_3\mydatabase.db
+-- database: c:\Users\Marina-PC\Desktop\apex_bando_de_dados\aula_3_e_4\mydatabase.db
 -- Somando todas as idades:
 SELECT SUM (idade) AS SOMA_DAS_IDADES FROM programadores
 WHERE IDADE > 26;
@@ -77,7 +77,7 @@ ORDER BY notas DESC;
 
 -- Calcule a média das notas dos alunos.
 
-SELECT AVG(notas) as media_das_notas
+SELECT round(AVG(notas), 2) as media_das_notas
 from Alunos;
 
 -- Inserir mais 15 linhas com dados distintos, e modirifcar três linhas existentes em pelo menos duas colunas cada.
@@ -158,8 +158,14 @@ order by nome asc;
 
 -- Conte quantos alunos obtiveram a nota máxima na disciplina de "Química".
 
-Select count(*) Alunos
-where notas
+Select count(*) as obtveram_nota_maxima from Alunos
+where notas = max(nota)
+and materia = 'Química'
+
+SELECT COUNT(*) AS obtveram_nota_maxima
+FROM Alunos
+WHERE nota = (SELECT MAX(nota) FROM Alunos WHERE materia = 'Química')
+    AND materia = 'Química';
 
 -- Selecione os alunos cujo nome contém a letra "e" e a idade é maior que 25 na tabela "Alunos".
 
