@@ -131,4 +131,61 @@ left join contatos
 on programadores.email = contatos.email_ctt;
 
 
+-- Agora, suponha que você queira obter uma lista dos Usuarios juntamente 
+-- com os contatos correspondentes com base no id.
+-- Vamos inserir a coluna ativo em ambas as tabelas do tipo boolean (pesquisar como inserir boolean)
+-- Metade das linhas das duas tabelas tem que estar com o ativo sendo true, e a outra metade false
+-- A consulta deve retornar apenas os usuarios que possuem um id na tabela 
+-- contatos correspondente ao id da tabela usuarios.
+-- Após o ON, adicione um where no final para adicionar ao filtro também
+-- apenas as idades que são maiores que 18 e menores que 30
+-- No Final ordene por nome
 
+
+-- Vamos inserir a coluna ativo em ambas as tabelas do tipo boolean (pesquisar como inserir boolean)
+
+ALTER TABLE contatos
+ADD COLUMN situacao_ctt boolean;
+
+ALTER TABLE usuarios
+ADD COLUMN situacao_usu boolean;
+
+
+-- Metade das linhas das duas tabelas tem que estar com o ativo sendo true, e a outra metade false
+
+update contatos
+set situacao_ctt = False
+where id <= 10;
+
+update usuarios
+set situacao_usu = true
+where id > 5;
+
+-- A consulta deve retornar apenas os usuarios que possuem um id na tabela 
+-- contatos correspondente ao id da tabela usuarios.
+
+select  usuarios.id as id_usuario,
+        usuarios.nome_usu as nome_usuario,
+        contatos.id as id_contato,
+        contatos. nome_ctt as nome_contato
+from usuarios left join contatos
+on usuarios.id = contatos.id;
+
+-- Após o ON, adicione um where no final para adicionar ao filtro também
+-- apenas as idades que são maiores que 18 e menores que 30
+-- No Final ordene por nome
+
+select  usuarios.id as id_usuario,
+        usuarios.nome_usu as nome_usuario,
+        usuarios.idade_usu as idade_usuario,
+        contatos.id as id_contato,
+        contatos. nome_ctt as nome_contato,        
+        contatos.idade_ctt as idade_contato
+from usuarios left join contatos
+on usuarios.id = contatos.id
+where usuarios.idade_usu BETWEEN 18 and 30
+ORDER BY nome_ctt asc;
+
+
+
+select * from usuarios;
